@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Update these paths to match the exact filenames of your high-quality photos in the public/images/ folder
+const photos = [
+    { src: "/images/classroom-1.jpg", alt: "Students attending a physics lecture in Ganga Nagar branch" },
+    { src: "/images/daksh-teaching.jpg", alt: "Daksh Narang solving mechanics problems on the board" },
+    { src: "/images/classroom-2.jpg", alt: "Interactive doubt-solving session at Shastri Nagar" },
+    { src: "/images/kuldeep-chemistry.jpg", alt: "Kuldeep Chauhan explaining organic chemistry" },
+    { src: "/images/students-studying.jpg", alt: "Focused students taking a mock test" },
+    { src: "/images/seminar-event.jpg", alt: "Career counseling seminar for Class 12 students" }
+];
+---
+
+<Layout title="Gallery | Cube Classes" description="Take a look inside Cube Classes Meerut. Real photos of our classrooms, teaching sessions, and student environment.">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 5%;">
+        <h1 style="text-align: center; color: #042B63; margin-bottom: 1rem; font-size: 2.5rem;">Life at Cube Classes</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">Step inside our Ganga Nagar and Shastri Nagar branches. We provide a focused, interactive environment designed for cracking JEE, NEET, and Board Exams.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            {photos.map((photo) => (
+                <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: #eee; aspect-ratio: 4/3;">
+                    <img src={photo.src} alt={photo.alt} style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" />
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>

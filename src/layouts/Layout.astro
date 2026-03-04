@@ -1,5 +1,8 @@
 ---
 const { title, description } = Astro.props;
+
+// This grabs the current URL path so we can highlight the correct nav link
+const currentPath = Astro.url.pathname;
 ---
 
 <!DOCTYPE html>
@@ -39,35 +42,100 @@ const { title, description } = Astro.props;
     }
     </script>
     <style is:global>
-        /* Paste the CSS I provided previously here */
         :root { --primary-blue: #0A58CA; --dark-blue: #042B63; --accent-orange: #FF6B00; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: #F8F9FA; color: #333; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
         header { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); text-decoration: none; }
-        nav a { margin: 0 1rem; text-decoration: none; color: #333; font-weight: 500; }
+        
+        nav a { 
+            margin: 0 1rem; 
+            text-decoration: none; 
+            color: #333; 
+            font-weight: 500; 
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        /* The Active State CSS */
+        nav a:hover, nav a.active { 
+            color: var(--primary-blue); 
+            border-bottom-color: var(--primary-blue); 
+        }
+
         .btn { padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; }
         .btn-primary { background: var(--primary-blue); color: #fff; }
         .btn-accent { background: var(--accent-orange); color: #fff; }
         .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25D366; color: white; padding: 15px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
+
+        /* --- MOBILE RESPONSIVE OVERRIDES --- */
+        @media (max-width: 768px) {
+            /* Force all grids to stack into a single column */
+            section[style*="grid-template-columns"], 
+            div[style*="grid-template-columns"],
+            footer > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            /* Fix the Header and Navigation */
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 5%;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+                justify-content: center;
+            }
+            
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Adjust paddings for mobile screens */
+            section, .container {
+                padding: 3rem 5% !important;
+            }
+            
+            /* Make the Hero Text smaller */
+            h1 { font-size: 2rem !important; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="/" class="logo">Cube Classes</a>
+        <a href="/" class="logo" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <img src="/images/logo.jpg" alt="Cube Classes Logo" style="height: 70px; width: auto; max-width: 300px;">
+            <span style="font-size: 2.2rem; font-weight: 800; color: var(--primary-blue);">Cube Classes</span>
+        </a>
+        
         <nav>
-            <a href="/">Home</a>
-            <a href="/courses">Courses</a>
-            <a href="/faculty">Faculty</a>
-            <a href="/results">Results</a>
-            <a href="/contact">Contact</a>
+            <a href="/" class={currentPath === "/" ? "active" : ""}>Home</a>
+            <a href="/courses" class={currentPath.startsWith("/courses") ? "active" : ""}>Courses</a>
+            <a href="/faculty" class={currentPath.startsWith("/faculty") ? "active" : ""}>Faculty</a>
+            <a href="/gallery" class={currentPath.startsWith("/gallery") ? "active" : ""}>Gallery</a>
+            <a href="/results" class={currentPath.startsWith("/results") ? "active" : ""}>Results</a>
+            <a href="/contact" class={currentPath.startsWith("/contact") ? "active" : ""}>Contact</a>
         </nav>
+        
         <a href="tel:+919897670452" class="btn btn-primary">Call Now</a>
     </header>
 
     <main>
-        <slot /> </main>
+        <slot /> 
+    </main>
 
     <footer style="background: var(--dark-blue); color: white; padding: 3rem 5%; margin-top: 4rem;">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">

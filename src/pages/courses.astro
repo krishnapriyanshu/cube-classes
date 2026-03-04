@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const courses = [
+    { 
+        title: "Class 9 Foundation", 
+        subjects: "Science & Mathematics", 
+        desc: "Build a rock-solid academic foundation early. We focus on core concept clarity to prepare students for future competitive exams." 
+    },
+    { 
+        title: "Class 10 Board Prep", 
+        subjects: "Science & Mathematics", 
+        desc: "Rigorous board exam preparation with regular test series, performance analysis, and dedicated doubt-solving sessions." 
+    },
+    { 
+        title: "Class 11 Coaching", 
+        subjects: "PCM Stream", 
+        desc: "In-depth conceptual clarity aligned with school curriculum and initial preparation for engineering and medical entrances." 
+    },
+    { 
+        title: "Class 12 Coaching", 
+        subjects: "PCM Stream", 
+        desc: "Targeted board exam strategies combined with advanced competitive exam prep to maximize your final school year results." 
+    },
+    { 
+        title: "JEE Mains & Advanced", 
+        subjects: "Physics, Chemistry, Maths", 
+        desc: "Intensive problem-solving, advanced test series, and expert guidance to crack one of the toughest engineering exams." 
+    },
+    { 
+        title: "NEET Preparation", 
+        subjects: "Physics, Chemistry, Biology", 
+        desc: "Strictly NCERT-focused curriculum with extensive mock tests to ensure top state and all-India ranks in medical entrances." 
+    }
+];
+---
+
+<Layout title="Our Courses" description="Explore coaching programs for Class 9-12, JEE, and NEET at Cube Classes Meerut.">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 5%;">
+        <h1 style="text-align: center; color: #042B63; margin-bottom: 1rem; font-size: 2.5rem;">Our Academic Programs</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Small batch sizes, experienced faculty, and regular parent progress reports. Choose the right program for your goals.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            {courses.map((course) => (
+                <div style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #0A58CA; display: flex; flex-direction: column;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #333;">{course.title}</h3>
+                    <p style="color: #FF6B00; font-weight: 600; margin-bottom: 1rem;">{course.subjects}</p>
+                    <p style="color: #666; margin-bottom: 1.5rem; flex-grow: 1; line-height: 1.6;">{course.desc}</p>
+                    <a href="/contact" class="btn btn-primary" style="text-align: center; display: block; width: 100%;">Enroll Now</a>
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>
