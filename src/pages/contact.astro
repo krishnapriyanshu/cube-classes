@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us" description="Get in touch with Cube Classes. Visit our Ganga Nagar or Shastri Nagar branches in Meerut.">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 5%;">
+        <h1 style="text-align: center; color: #042B63; margin-bottom: 3rem; font-size: 2.5rem;">Contact Cube Classes</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+            
+            <div>
+                <h3 style="color: #0A58CA; margin-bottom: 1rem; font-size: 1.5rem;">Our Branches</h3>
+                
+                <div style="margin-bottom: 2rem; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h4 style="margin-bottom: 0.5rem; color: #333;">Ganga Nagar Branch</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">📍 L-Pocket, Ganga Nagar,<br>Meerut, Uttar Pradesh 250001</p>
+                    <div style="width: 100%; overflow: hidden; border-radius: 8px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55842.18591039108!2d77.70445852820039!3d28.983322354986093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c7b23a88a2d35%3A0x21fb72f7b677cb6a!2sCube%20Classes%20(Ganga%20Nagar)!5e0!3m2!1sen!2sin!4v1772625157024!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <h4 style="margin-bottom: 0.5rem; color: #333;">Shastri Nagar Branch</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">📍 Sector 3, Shastri Nagar,<br>Meerut, Uttar Pradesh 250002</p>
+                    <div style="width: 100%; overflow: hidden; border-radius: 8px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13963.338038909991!2d77.7147102355957!3d28.962632607577245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c64b0aba0ffff%3A0x66f2b338fb3ad3d1!2sCube%20Classes%20(Shastri%20Nagar)!5e0!3m2!1sen!2sin!4v1772625071867!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom: 0.5rem; color: #333;">Direct Contact</h4>
+                    <p style="font-size: 1.2rem;">📞 <strong>+91 9897670452</strong></p>
+                    <p style="font-size: 1.2rem; margin-top: 0.5rem;">💬 <a href="https://wa.me/919897670452" style="color: #25D366; text-decoration: none; font-weight: bold;">WhatsApp Us</a></p>
+                </div>
+            </div>
+
+            <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content;">
+                <h3 style="margin-bottom: 1.5rem; color: #042B63;">Send us a Message</h3>
+                <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <input type="hidden" name="access_key" value="e95665d5-e12d-4799-86af-60596ed0df29">
+                    <input type="text" name="name" placeholder="Your Name" required style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="tel" name="phone" placeholder="Phone Number" required style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <select name="course_interest" required style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                        <option value="" disabled selected>Course Interest</option>
+                        <option value="Class 9-10">Class 9/10 Foundation</option>
+                        <option value="Class 11-12">Class 11/12 Boards</option>
+                        <option value="JEE">JEE Preparation</option>
+                        <option value="NEET">NEET Preparation</option>
+                    </select>
+                    <textarea name="message" placeholder="How can we help you?" rows="5" required style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px; resize: vertical;"></textarea>
+                    <button type="submit" style="padding: 1rem; background: #0A58CA; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 1.1rem;">Submit Inquiry</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Update these arrays when you have real data. 
+// The page will automatically render the new cards.
+const jeeResults = [
+    { name: "Student Name", rank: "AIR 150", score: "99.9 PR", year: "2025", exam: "JEE Advanced" },
+    { name: "Student Name", rank: "AIR 420", score: "99.7 PR", year: "2025", exam: "JEE Mains" },
+    { name: "Student Name", rank: "AIR 890", score: "99.2 PR", year: "2024", exam: "JEE Mains" }
+];
+
+const neetResults = [
+    { name: "Student Name", score: "680/720", rank: "State Rank 12", year: "2025", exam: "NEET UG" },
+    { name: "Student Name", score: "665/720", rank: "State Rank 45", year: "2025", exam: "NEET UG" },
+    { name: "Student Name", score: "650/720", rank: "State Rank 98", year: "2024", exam: "NEET UG" }
+];
+---
+
+<Layout title="Our Results | Cube Classes" description="Top JEE, NEET, and Board Exam results from Cube Classes, Meerut. See our track record of success.">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 4rem 5%;">
+        <h1 style="text-align: center; color: #042B63; margin-bottom: 1rem; font-size: 2.5rem;">Our Success Stories</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">Consistent top ranks in JEE, NEET, and Board Exams. The results speak for themselves.</p>
+        
+        <h2 style="color: #0A58CA; margin-bottom: 2rem; border-bottom: 2px solid #eee; padding-bottom: 0.5rem;">Top JEE Rankers</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            {jeeResults.map((student) => (
+                <div style="background: white; border-radius: 8px; padding: 2rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
+                    <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.8rem;">[Photo]</div>
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">{student.name}</h3>
+                    <p style="color: #FF6B00; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.25rem;">{student.rank}</p>
+                    <p style="color: #666; font-size: 0.9rem;">{student.exam} ({student.year})</p>
+                    <p style="color: #0A58CA; font-weight: 600; margin-top: 0.5rem;">{student.score}</p>
+                </div>
+            ))}
+        </div>
+
+        <h2 style="color: #0A58CA; margin-bottom: 2rem; border-bottom: 2px solid #eee; padding-bottom: 0.5rem;">Top NEET Rankers</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            {neetResults.map((student) => (
+                <div style="background: white; border-radius: 8px; padding: 2rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
+                    <div style="width: 100px; height: 100px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 0.8rem;">[Photo]</div>
+                    <h3 style="color: #333; margin-bottom: 0.5rem;">{student.name}</h3>
+                    <p style="color: #FF6B00; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.25rem;">{student.score}</p>
+                    <p style="color: #666; font-size: 0.9rem;">{student.exam} ({student.year})</p>
+                    <p style="color: #0A58CA; font-weight: 600; margin-top: 0.5rem;">{student.rank}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>

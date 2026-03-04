@@ -1,17 +1,43 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home" description="Best coaching institute in Meerut for JEE, NEET, and Science students.">
+    <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 5rem 5%; background: linear-gradient(135deg, #042B63 0%, #0A58CA 100%); color: white; align-items: center;">
+        <div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Best Coaching Institute in Meerut for Science Students</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Expert Coaching for Classes 9–12 | JEE | NEET Preparation</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #FF6B00;">500+</h3><p>Students</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #FF6B00;">95%</h3><p>Success Rate</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 2.5rem; border-radius: 8px; color: #333;">
+            <h3 style="margin-bottom: 1.5rem; text-align: center; color: #042B63;">Book Your Free Demo</h3>
+            <form action="https://api.web3forms.com/submit" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="hidden" name="access_key" value="e95665d5-e12d-4799-86af-60596ed0df29">
+                <input type="text" name="name" placeholder="Student Name" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="tel" name="phone" placeholder="Phone Number" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                <select name="class" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="" disabled selected>Select Class</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                    <option value="11">Class 11</option>
+                    <option value="12">Class 12</option>
+                </select>
+                <select name="course" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="" disabled selected>Target Exam</option>
+                    <option value="JEE">JEE</option>
+                    <option value="NEET">NEET</option>
+                    <option value="Boards">Boards</option>
+                </select>
+                <button type="submit" class="btn btn-accent" style="width: 100%; margin-top: 0.5rem;">Book Demo</button>
+            </form>
+        </div>
+    </section>
+</Layout>
