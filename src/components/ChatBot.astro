@@ -1,3 +1,111 @@
+---
+// src/components/ChatBot.astro
+---
+
+<div class="chatbot-container">
+    <button id="chat-toggle" class="chat-launcher" aria-label="Open Chat">
+        <div class="launcher-icon">
+            <span class="msg-icon">💬</span>
+            <span class="close-icon" style="display:none;">×</span>
+        </div>
+        <span class="launcher-text">Questions? Ask Us</span>
+    </button>
+
+    <div id="chat-window" class="chat-window hidden">
+        <div class="chat-header">
+            <div class="header-content" style="display: flex; align-items: center; gap: 12px;">
+                <div class="avatar-status" style="position: relative;">
+                    <div class="avatar" style="width: 40px; height: 40px; background: var(--cube-orange); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem;">DN</div>
+                    <span class="online-dot" style="position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; background: #25D366; border: 2px solid var(--cube-blue); border-radius: 50%;"></span>
+                </div>
+                <div class="title-area">
+                    <strong style="display: block; font-size: 0.9rem;">Daksh Narang</strong>
+                    <p style="font-size: 0.7rem; opacity: 0.9; margin: 0;">Online | Replies instantly</p>
+                </div>
+            </div>
+            <button id="close-chat" class="header-close" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
+        </div>
+        
+        <div id="chat-body" class="chat-body">
+            <div class="message bot">
+                <p>Welcome to <strong>Cube Classes</strong>! 👋</p>
+                <p>How can I help you today? Click a question below.</p>
+            </div>
+            
+            <div class="quick-questions" id="quick-questions">
+                <button class="q-chip" data-q="gn-loc">Ganga Nagar Location</button>
+                <button class="q-chip" data-q="sn-loc">Shastri Nagar Location</button>
+                <button class="q-chip" data-q="gn-time">Ganga Nagar Timings</button>
+                <button class="q-chip" data-q="sn-time">Shastri Nagar Timings</button>
+            </div>
+        </div>
+
+        <div id="typing" class="typing-indicator hidden">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" />
+            <button id="send-msg" class="send-btn">➤</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --cube-blue: #0A58CA;
+        --cube-orange: #FF6B00;
+        --cube-dark: #042B63;
+    }
+
+    .chatbot-container { position: fixed; bottom: 90px; right: 20px; z-index: 9999; font-family: 'Inter', sans-serif; }
+
+    .chat-launcher {
+        background: var(--cube-blue); color: white; border: none; padding: 12px 24px;
+        border-radius: 50px; display: flex; align-items: center; gap: 12px; cursor: pointer;
+        box-shadow: 0 4px 15px rgba(10, 88, 202, 0.4); font-weight: 700; transition: transform 0.2s;
+    }
+    .chat-launcher:hover { transform: translateY(-2px); }
+
+    .chat-window {
+        position: absolute; bottom: 70px; right: 0; width: 340px; height: 450px;
+        background: white; border-radius: 12px; display: flex; flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid #eee; overflow: hidden;
+    }
+
+    .hidden { display: none !important; }
+
+    .chat-header { background: var(--cube-blue); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+
+    .chat-body { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #F8F9FA; }
+
+    .message { max-width: 85%; padding: 10px 14px; border-radius: 10px; font-size: 0.9rem; line-height: 1.4; }
+    .message.bot { background: white; border: 1px solid #ddd; align-self: flex-start; color: #333; }
+    .message.user { background: var(--cube-blue); color: white; align-self: flex-end; }
+
+    .quick-questions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .q-chip { 
+        background: white; border: 1px solid var(--cube-blue); color: var(--cube-blue);
+        padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+        cursor: pointer; transition: all 0.2s;
+    }
+    .q-chip:hover { background: var(--cube-blue); color: white; }
+
+    .typing-indicator { padding: 5px 20px; display: flex; gap: 4px; }
+    .typing-indicator span { width: 6px; height: 6px; background: #999; border-radius: 50%; animation: blink 1.4s infinite both; }
+
+    .chat-footer { padding: 12px; border-top: 1px solid #eee; display: flex; gap: 8px; background: white; }
+    #chat-input { flex-grow: 1; border: 1px solid #ddd; padding: 10px; border-radius: 8px; outline: none; font-size: 0.9rem; }
+    #chat-input:focus { border-color: var(--cube-blue); }
+    .send-btn { background: var(--cube-orange); color: white; border: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+    @media (max-width: 400px) {
+        .chat-window { width: 300px; right: -10px; }
+    }
+
+    @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+</style>
+
 <script>
     const launcher = document.getElementById('chat-toggle') as HTMLElement;
     const windowEl = document.getElementById('chat-window') as HTMLElement;
@@ -47,10 +155,10 @@
 
             switch(key) {
                 case 'gn-loc':
-                    appendMessage("📍 <strong>Ganga Nagar Branch:</strong> L-Pocket, Ganga Nagar, Meerut (250001).", 'bot');
+                    appendMessage("📍 <strong>Ganga Nagar Branch:</strong> L-Pocket, Ganga Nagar, Meerut (250001).<br><br><a href='https://www.google.com/maps/search/?api=1&query=L-Pocket,+Ganga+Nagar,+Meerut' target='_blank' style='display:inline-block; background:var(--cube-blue); color:white; padding:6px 12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.85rem;'>📍 Open in Google Maps</a>", 'bot');
                     break;
                 case 'sn-loc':
-                    appendMessage("📍 <strong>Shastri Nagar Branch:</strong> Sector 3, Shastri Nagar, Meerut (250002).", 'bot');
+                    appendMessage("📍 <strong>Shastri Nagar Branch:</strong> Sector 3, Shastri Nagar, Meerut (250002).<br><br><a href='https://www.google.com/maps/search/?api=1&query=Sector+3,+Shastri+Nagar,+Meerut' target='_blank' style='display:inline-block; background:var(--cube-blue); color:white; padding:6px 12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.85rem;'>📍 Open in Google Maps</a>", 'bot');
                     break;
                 case 'gn-time':
                     appendMessage("Our batches at the <strong>Ganga Nagar</strong> branch start from <strong>3:00 PM</strong> onwards.", 'bot');
