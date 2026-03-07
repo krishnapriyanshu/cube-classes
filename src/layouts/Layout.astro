@@ -1,4 +1,6 @@
 ---
+import ChatBot from '../components/ChatBot.astro';
+
 const { title, description } = Astro.props;
 
 // This grabs the current URL path so we can highlight the correct nav link
@@ -141,7 +143,7 @@ const currentPath = Astro.url.pathname;
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
             <div>
                 <h3>Cube Classes</h3>
-                <p>Expert Coaching for Classes 9–12 | JEE | NEET</p>
+                <p>Expert Coaching for Classes 9-12 | JEE | NEET</p>
             </div>
             <div>
                 <h4>Our Branches</h4>
@@ -153,5 +155,7 @@ const currentPath = Astro.url.pathname;
     </footer>
 
     <a href="https://wa.me/919897670452" class="whatsapp-float" target="_blank">Chat on WhatsApp</a>
+    
+    <ChatBot />
 </body>
 </html>

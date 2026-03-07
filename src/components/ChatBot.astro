@@ -1,0 +1,89 @@
+<script>
+    const launcher = document.getElementById('chat-toggle') as HTMLElement;
+    const windowEl = document.getElementById('chat-window') as HTMLElement;
+    const closeBtn = document.getElementById('close-chat') as HTMLElement;
+    const sendBtn = document.getElementById('send-msg') as HTMLElement;
+    const input = document.getElementById('chat-input') as HTMLInputElement;
+    const body = document.getElementById('chat-body') as HTMLElement;
+    const typing = document.getElementById('typing') as HTMLElement;
+    const chips = document.querySelectorAll('.q-chip');
+
+    if (launcher && windowEl && closeBtn && sendBtn && input && body && typing) {
+        launcher.addEventListener('click', () => {
+            windowEl.classList.toggle('hidden');
+            const msgIcon = launcher.querySelector('.msg-icon') as HTMLElement;
+            const closeIcon = launcher.querySelector('.close-icon') as HTMLElement;
+            
+            if (windowEl.classList.contains('hidden')) {
+                if(msgIcon) msgIcon.style.display = 'inline';
+                if(closeIcon) closeIcon.style.display = 'none';
+            } else {
+                if(msgIcon) msgIcon.style.display = 'none';
+                if(closeIcon) closeIcon.style.display = 'inline';
+            }
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            windowEl.classList.add('hidden');
+            const msgIcon = launcher.querySelector('.msg-icon') as HTMLElement;
+            const closeIcon = launcher.querySelector('.close-icon') as HTMLElement;
+            
+            if(msgIcon) msgIcon.style.display = 'inline';
+            if(closeIcon) closeIcon.style.display = 'none';
+        });
+
+        function appendMessage(text: string, type: string) {
+            const msg = document.createElement('div');
+            msg.className = `message ${type}`;
+            msg.innerHTML = text;
+            body.appendChild(msg);
+            body.scrollTo(0, body.scrollHeight);
+        }
+
+        async function botHandle(key: string) {
+            typing.classList.remove('hidden');
+            await new Promise(r => setTimeout(r, 600));
+            typing.classList.add('hidden');
+
+            switch(key) {
+                case 'gn-loc':
+                    appendMessage("📍 <strong>Ganga Nagar Branch:</strong> L-Pocket, Ganga Nagar, Meerut (250001).", 'bot');
+                    break;
+                case 'sn-loc':
+                    appendMessage("📍 <strong>Shastri Nagar Branch:</strong> Sector 3, Shastri Nagar, Meerut (250002).", 'bot');
+                    break;
+                case 'gn-time':
+                    appendMessage("Our batches at the <strong>Ganga Nagar</strong> branch start from <strong>3:00 PM</strong> onwards.", 'bot');
+                    break;
+                case 'sn-time':
+                    appendMessage("Our batches at the <strong>Shastri Nagar</strong> branch start from <strong>5:00 PM</strong> onwards.", 'bot');
+                    break;
+                default:
+                    appendMessage("I can only answer predefined questions here. For anything else, please message us directly on WhatsApp:<br><br><a href='https://wa.me/919897670452' target='_blank' style='display:inline-block; background:var(--cube-orange); color:white; padding:8px 12px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.85rem;'>Chat on WhatsApp</a>", 'bot');
+            }
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const q = chip.getAttribute('data-q');
+                const text = (chip as HTMLElement).innerText;
+                appendMessage(text, 'user');
+                if(q) botHandle(q);
+            });
+        });
+
+        sendBtn.addEventListener('click', () => {
+            const val = input.value.trim();
+            if(!val) return;
+            appendMessage(val, 'user');
+            input.value = '';
+            botHandle('default');
+        });
+        
+        input.addEventListener('keypress', function (e: KeyboardEvent) {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+    }
+</script>
